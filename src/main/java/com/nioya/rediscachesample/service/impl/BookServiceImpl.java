@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
-    
+    @Cacheable(value = Constants.CacheNames.ALL_BOOKS, key = "T(org.springframework.cache.interceptor.SimpleKey).hashCode()")
     @Override
     public List<Book> getAllBooks() {
         List<Book> bookList = new ArrayList<>();
@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService {
         return bookList;
     }
 
-  
+    @Cacheable(value = Constants.CacheNames.BOOK)
     @Override
     public Book getBookById(int id) {
         return Book.builder().id(id).name("RANDOM").build();
